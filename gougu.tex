@@ -1,11 +1,21 @@
 %-*- coding: UTF-8 -*-
 % gougu.tex
 % 勾股定理
-\documentclass[UTF8,c5size]{ctexart} 
+\documentclass[hyperref,UTF8,c5size]{ctexart} 
 % ctexart, ctexrep, ctexbook 分别用来写中文短文，中文报告，中文书籍 
 % ctexart默认时标题不独自成页的，可加入选项titlepage修改为独自成页
 % c5size表示正文正五号字体
 % 2.4.1
+
+\usepackage[colorlinks,linkcolor=black,bookmarksnumbered=true,backref=true,bookmarks=true,bookmarksopen=true]{hyperref}  
+% hyperref超连接、书签
+% 3.2.3
+
+% \usepackage[raggedright]{titlesec}
+% titlesec宏包可用来全局的改变标题的字体、字号、对齐方式
+% raggedright将标题左对齐（效果是这样的）
+% usepackage可能与CTEXsetup设置标题冲突，可能重复输出序号如二2
+% 2.3.4
 \usepackage{graphicx}
 % \includegraphics[scale=0.6]{xiantu.png}
 \usepackage{float}
@@ -15,6 +25,7 @@
 \usepackage{geometry}
 \geometry{a4paper,centering,scale=0.8}
 % 设计页面尺寸
+% 2.4.2
 \usepackage[format=hang,font=small,textfont=it]{caption}
 % 改变图标标题格式
 \usepackage[nottoc]{tocbibind} 
@@ -36,10 +47,12 @@
 % 2.2.4
 
 
-\title{\heiti 杂谈勾股定理}
+\title{\heiti\zihao{0} 杂谈勾股定理}
 \author{\kaishu 张三}
 \date{\today}
 % title author date 可以放在maketitle前的任何位置，通常放在导言区 date可以省略，默认为今天
+% 字号0为出好，-0为小初号，1为一号，-1为小一号
+% 2.1.4
 
 \bibliographystyle{plain}
 % \bibliographystyle命令设定参考文献格式，通常在导言区完成。
@@ -56,6 +69,16 @@
 % 可使用JabRef生存.bib
 % 3.3.1
 
+\CTEXsetup[number={\chinese{section}},format={\raggedright}, nameformat={\LARGE\bfseries}, titleformat={\LARGE\bfseries}]{section}
+% \CTEXsetup[name={第,章}, aftername={---} ,format={\raggedright}, nameformat={\Large\bfseries}, titleformat={\LARGE\sffamily}, indent={1pc}]{chapter}
+% 2.3.4
+
+\usepackage{tocloft}
+\renewcommand\cfttoctitlefont{\LARGE\bfseries}
+% \CTEXsetup改变section的的format为左对其后，\contentsname的也左对齐了，且格式消失了
+% 使用tocloft修改\contentsname字体格式
+% 3.1.3
+
 %这里之前称为导言区preamble，这里正式开始文档
 \begin{document}
 
@@ -64,10 +87,30 @@
 % 可通过文档类选项notitlepage修改不单独成页
 % title可不通过\title \maketitle命令得到，直接手工排版得到，
 % 2.3.1
+% 不单独成页的\maketitle、单独成页的\part以及\chapter命令所在的一页，使用plain风格只显示页码
+% 2.4.3
 
 \begin{abstract}
         这是一篇关于勾股定理的小短文。
 \end{abstract}
+
+
+\thispagestyle{empty}
+% maketitle默认此页的页面格式为plain
+% \thispagestyle{headings}单独设置此页风格
+% 2.4.3
+
+\clearpage
+% 另起新页
+% 2.3.2
+
+\pagenumbering{roman}
+% 修改页码的编号方式，此命令会使页码从1开始
+% 2.4.3
+
+\pagestyle{plain}
+% 整体设置页面风格
+% 2.4.3
 
 \tableofcontents
 % 读入.toc目录文件如果存在的话
@@ -77,9 +120,13 @@
 % 3.1.1
 % 3.1.2
 
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{headings}
+
 \section{勾股定理在古代}
 % ctexart的最高层
-% ctexrep、ctexbook的最igaocheng为chapter
+% ctexrep、ctexbook的最高层为chapter
 % 三种文档类还有一个可选的最高层part
 % \appendix为附录开始，改用字母标号
 % 2.3.2 表2.13 章节层次
